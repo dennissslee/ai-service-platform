@@ -1,0 +1,28 @@
+{
+	email {$CADDY_EMAIL}
+}
+
+{$PORTAL_DOMAIN} {
+	encode zstd gzip
+	reverse_proxy portal:80
+}
+
+{$NEW_API_DOMAIN} {
+	encode zstd gzip
+	reverse_proxy new-api:3000
+}
+
+{$SUB2API_DOMAIN} {
+	encode zstd gzip
+	reverse_proxy sub2api:8080
+}
+
+{$LITELLM_DOMAIN} {
+	encode zstd gzip
+	reverse_proxy litellm:4000
+}
+
+{$OPEN_WEBUI_DOMAIN} {
+	encode zstd gzip
+	reverse_proxy open-webui:8080
+}

@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI 服务平台</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f4f6f8;
+        color: #17202a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+      }
+
+      main {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 48px 0 42px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 44px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+      }
+
+      .mark {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        place-items: center;
+        border-radius: 8px;
+        background: #1f7a6d;
+        color: #fff;
+        font-size: 16px;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #546170;
+        font-size: 14px;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #27a56f;
+      }
+
+      h1 {
+        max-width: 780px;
+        margin: 0;
+        font-size: clamp(34px, 5vw, 64px);
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 720px;
+        margin-top: 18px;
+        color: #596675;
+        font-size: 18px;
+        line-height: 1.65;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 42px;
+      }
+
+      .service {
+        display: flex;
+        min-height: 172px;
+        padding: 22px;
+        border: 1px solid #d8dee7;
+        border-radius: 8px;
+        background: #fff;
+        color: inherit;
+        text-decoration: none;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+      }
+
+      .service:hover {
+        transform: translateY(-2px);
+        border-color: #1f7a6d;
+        box-shadow: 0 16px 34px rgba(23, 32, 42, 0.1);
+      }
+
+      .service:focus-visible {
+        outline: 3px solid rgba(31, 122, 109, 0.3);
+        outline-offset: 3px;
+      }
+
+      .service header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .icon {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border-radius: 8px;
+        background: #edf7f4;
+        color: #1f7a6d;
+        font-weight: 800;
+      }
+
+      .arrow {
+        color: #8a96a5;
+        font-size: 20px;
+      }
+
+      strong {
+        display: block;
+        margin-top: 22px;
+        font-size: 20px;
+        line-height: 1.2;
+      }
+
+      span {
+        display: block;
+        margin-top: 10px;
+        color: #627083;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .note {
+        margin-top: 28px;
+        color: #697789;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 560px) {
+        main {
+          padding-top: 28px;
+        }
+
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+          margin-bottom: 34px;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav class="topbar" aria-label="平台状态">
+        <div class="brand">
+          <div class="mark" aria-hidden="true">AI</div>
+          <div>AI 服务平台</div>
+        </div>
+        <div class="status">
+          <span class="dot" aria-hidden="true"></span>
+          <span>第一阶段：服务独立运行</span>
+        </div>
+      </nav>
+
+      <h1>统一官网入口，连接你的 AI 服务后台。</h1>
+      <p class="lead">官网先负责清晰跳转，后台系统保持独立。后续可以逐步接入统一登录、支付、额度、模型路由和企业管理能力。</p>
+
+      <section class="grid" aria-label="服务入口">
+        <a
+          class="service"
+          href="http://localhost:3000"
+          data-env-domain='{{ env "NEW_API_DOMAIN" }}'
+          data-protocol="https"
+        >
+          <header>
+            <div class="icon" aria-hidden="true">N</div>
+            <div class="arrow" aria-hidden="true">›</div>
+          </header>
+          <div>
+            <strong>New API</strong>
+            <span>单模型 API 中转、渠道、额度与调用管理。</span>
+          </div>
+        </a>
+
+        <a
+          class="service"
+          href="http://localhost:3001"
+          data-env-domain='{{ env "SUB2API_DOMAIN" }}'
+          data-protocol="https"
+        >
+          <header>
+            <div class="icon" aria-hidden="true">S</div>
+            <div class="arrow" aria-hidden="true">›</div>
+          </header>
+          <div>
+            <strong>Sub2API</strong>
+            <span>轻量用户服务，适合订阅与 API 转换流程。</span>
+          </div>
+        </a>
+
+        <a
+          class="service"
+          href="http://localhost:4000"
+          data-env-domain='{{ env "LITELLM_DOMAIN" }}'
+          data-protocol="https"
+        >
+          <header>
+            <div class="icon" aria-hidden="true">L</div>
+            <div class="arrow" aria-hidden="true">›</div>
+          </header>
+          <div>
+            <strong>LiteLLM</strong>
+            <span>企业多模型网关，负责统一模型路由与策略。</span>
+          </div>
+        </a>
+
+        <a
+          class="service"
+          href="http://localhost:8081"
+          data-env-domain='{{ env "OPEN_WEBUI_DOMAIN" }}'
+          data-protocol="https"
+        >
+          <header>
+            <div class="icon" aria-hidden="true">W</div>
+            <div class="arrow" aria-hidden="true">›</div>
+          </header>
+          <div>
+            <strong>Open WebUI</strong>
+            <span>网页聊天界面，后续可深度定制品牌体验。</span>
+          </div>
+        </a>
+      </section>
+
+      <p class="note">本地直接打开时，入口默认指向 localhost 调试端口；部署到 Caddy 后会自动使用 .env 中配置的正式域名。</p>
+    </main>
+
+    <script>
+      const templatePattern = /{{|}}/;
+
+      document.querySelectorAll("[data-env-domain]").forEach((link) => {
+        const domain = link.dataset.envDomain.trim();
+        const protocol = link.dataset.protocol || "https";
+
+        if (domain && !templatePattern.test(domain) && !domain.endsWith("example.com")) {
+          link.href = `${protocol}://${domain}`;
+        }
+      });
+    </script>
+  </body>
+</html>

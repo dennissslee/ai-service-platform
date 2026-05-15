@@ -1,0 +1,28 @@
+# Copy this file to docker-compose.source.yml when you start customizing
+# upstream projects. Keep docker-compose.yml as the stable deployment contract,
+# and use this override to swap selected services from registry images to local
+# source builds.
+#
+# Example:
+#   mkdir -p services
+#   git clone https://github.com/Calcium-Ion/new-api.git services/new-api
+#   git clone https://github.com/Wei-Shaw/sub2api.git services/sub2api
+#   cd infra
+#   docker compose --env-file ../.env -f docker-compose.yml -f docker-compose.source.yml up -d --build
+
+services:
+  new-api:
+    build:
+      context: ../services/new-api
+    image: local/new-api:dev
+
+  sub2api:
+    build:
+      context: ../services/sub2api
+    image: local/sub2api:dev
+
+  # Uncomment when you need to customize Open WebUI.
+  # open-webui:
+  #   build:
+  #     context: ../services/open-webui
+  #   image: local/open-webui:dev

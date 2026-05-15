@@ -1,0 +1,9 @@
+/.env
+/.env.*
+!/.env.example
+
+/infra/docker-compose.source.yml
+/infra/docker-compose.override.yml
+
+*.log
+.cache/
