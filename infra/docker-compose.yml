@@ -78,9 +78,10 @@ services:
       redis:
         condition: service_healthy
     expose:
+      - "443"
       - "8080"
     ports:
-      - "${SUB2API_PORT:-3001}:8080"
+      - "${SUB2API_PORT:-3001}:443"
     environment:
       TZ: ${TZ:-Asia/Shanghai}
       PORT: "8080"

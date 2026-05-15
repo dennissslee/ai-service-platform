@@ -93,7 +93,9 @@ The starter portal lives at:
 infra/portal/index.html
 ```
 
-The portal page uses Caddy templates, so its links come from the domain values in `.env`. You can replace the starter page, or replace the `portal` service with your own image by setting:
+The portal page is static. In production it infers sibling service domains from the current host. For example, `portal.1.2.3.4.sslip.io` links to `new-api.1.2.3.4.sslip.io`, `sub2api.1.2.3.4.sslip.io`, and the other service hosts.
+
+You can replace the starter page, or replace the `portal` service with your own image by setting:
 
 When opened directly from the filesystem, the same page uses local debug links:
 
@@ -101,6 +103,8 @@ When opened directly from the filesystem, the same page uses local debug links:
 - `http://localhost:3001` for `sub2api`
 - `http://localhost:4000` for `litellm`
 - `http://localhost:8081` for `open-webui`
+
+Sub2API first-run setup may temporarily listen on container port `8080`, but after setup it can run on container port `443`. Caddy is configured with both upstreams and retries automatically.
 
 ```env
 PORTAL_IMAGE=your-registry/your-portal:latest

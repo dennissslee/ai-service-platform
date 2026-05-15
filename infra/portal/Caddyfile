@@ -1,5 +1,4 @@
 :80 {
 	root * /usr/share/caddy
-	templates
 	file_server
 }
