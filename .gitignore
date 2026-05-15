@@ -4,6 +4,7 @@
 
 /infra/docker-compose.source.yml
 /infra/docker-compose.override.yml
+/services/dify/
 
 *.log
 .cache/
