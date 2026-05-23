@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark light">
+    <title>Axiora Account | Register</title>
+    <style>
+      :root {
+        --bg: #050506;
+        --panel: rgba(255, 255, 255, 0.06);
+        --panel-strong: rgba(255, 255, 255, 0.1);
+        --line: rgba(255, 255, 255, 0.15);
+        --text: #f4f4f0;
+        --muted: #a8a8a1;
+        --soft: #75756f;
+        --accent: #ff493f;
+        --cyan: #72f7ff;
+        --radius: 8px;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 320px;
+        min-height: 100vh;
+        margin: 0;
+        background:
+          radial-gradient(circle at 78% 12%, rgba(114, 247, 255, 0.11), transparent 24rem),
+          radial-gradient(circle at 18% 78%, rgba(255, 73, 63, 0.16), transparent 28rem),
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          var(--bg);
+        background-size: auto, auto, 42px 42px, 42px 42px, auto;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        content: "";
+        background: linear-gradient(180deg, transparent 0%, rgba(5, 5, 6, 0.7) 58%, #050506 100%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      .shell {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .nav {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(18px);
+        background: rgba(5, 5, 6, 0.74);
+      }
+
+      .nav-inner {
+        display: flex;
+        min-height: 72px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 760;
+      }
+
+      .logo {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.02)),
+          #0d0d10;
+        color: #fff;
+        font-size: 14px;
+      }
+
+      .logo::before {
+        content: "AX";
+      }
+
+      .nav-actions,
+      .lang-switch {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .nav-link,
+      .ghost-btn,
+      .primary-btn,
+      .lang-btn {
+        display: inline-flex;
+        min-height: 38px;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius);
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, color 180ms ease;
+      }
+
+      .nav-link,
+      .ghost-btn,
+      .primary-btn {
+        padding: 0 15px;
+        border: 1px solid var(--line);
+        font-size: 13px;
+        white-space: nowrap;
+      }
+
+      .nav-link,
+      .ghost-btn {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .primary-btn {
+        border-color: rgba(255, 73, 63, 0.65);
+        background: linear-gradient(135deg, #f4f4ef, #ffd7d3);
+        color: #050506;
+        font-weight: 740;
+        box-shadow: 0 14px 42px rgba(255, 73, 63, 0.14);
+      }
+
+      .lang-switch {
+        padding: 3px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .lang-btn {
+        min-width: 38px;
+        border: 0;
+        background: transparent;
+        color: var(--soft);
+        cursor: pointer;
+        font-size: 12px;
+      }
+
+      .lang-btn[aria-pressed="true"] {
+        background: #f3f3ef;
+        color: #08080a;
+      }
+
+      .nav-link:hover,
+      .ghost-btn:hover,
+      .primary-btn:hover,
+      .lang-btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .register-layout {
+        display: grid;
+        min-height: calc(100vh - 72px);
+        grid-template-columns: minmax(0, 0.9fr) minmax(320px, 470px);
+        align-items: center;
+        gap: clamp(36px, 7vw, 96px);
+        padding: 70px 0;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .pulse {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 28px rgba(255, 73, 63, 0.85);
+      }
+
+      h1 {
+        max-width: 720px;
+        margin: 22px 0 0;
+        font-size: clamp(44px, 7vw, 84px);
+        line-height: 0.98;
+        overflow-wrap: anywhere;
+      }
+
+      .lead {
+        max-width: 620px;
+        margin: 26px 0 0;
+        color: #c5c5bd;
+        font-size: clamp(17px, 2.2vw, 21px);
+        line-height: 1.58;
+      }
+
+      .status-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 620px;
+        margin-top: 36px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.035);
+      }
+
+      .status-strip div {
+        min-height: 92px;
+        padding: 18px;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .status-strip div:last-child {
+        border-right: 0;
+      }
+
+      .status-strip strong {
+        display: block;
+        font-size: 24px;
+      }
+
+      .status-strip span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .card {
+        border: 1px solid rgba(255, 255, 255, 0.17);
+        border-radius: 14px;
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.1), transparent 34%),
+          rgba(12, 12, 15, 0.84);
+        box-shadow: 0 32px 90px rgba(0, 0, 0, 0.42);
+        overflow: hidden;
+      }
+
+      .card-top {
+        display: flex;
+        height: 46px;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 0 16px;
+      }
+
+      .traffic {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      .red { background: var(--accent); }
+      .yellow { background: #ffc94b; }
+      .green { background: #53e28f; }
+
+      form {
+        display: grid;
+        gap: 16px;
+        padding: 28px;
+      }
+
+      .form-title {
+        margin: 0 0 4px;
+        font-size: 26px;
+      }
+
+      .form-copy {
+        margin: 0 0 8px;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      label {
+        display: grid;
+        gap: 8px;
+        color: #deded8;
+        font-size: 13px;
+      }
+
+      input {
+        width: 100%;
+        min-height: 48px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: var(--radius);
+        padding: 0 14px;
+        outline: none;
+        background: rgba(255, 255, 255, 0.055);
+        color: var(--text);
+      }
+
+      input:focus {
+        border-color: rgba(114, 247, 255, 0.7);
+        box-shadow: 0 0 0 3px rgba(114, 247, 255, 0.08);
+      }
+
+      .submit {
+        min-height: 50px;
+        margin-top: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.88);
+        border-radius: var(--radius);
+        background: #f4f4ef;
+        color: #050506;
+        cursor: pointer;
+        font-weight: 760;
+      }
+
+      .note {
+        display: none;
+        margin: 0;
+        border: 1px solid rgba(114, 247, 255, 0.24);
+        border-radius: var(--radius);
+        padding: 12px;
+        background: rgba(114, 247, 255, 0.08);
+        color: #dffcff;
+        line-height: 1.5;
+      }
+
+      .note.is-visible {
+        display: block;
+      }
+
+      @media (max-width: 900px) {
+        .nav-inner,
+        .nav-actions {
+          align-items: stretch;
+          flex-direction: column;
+          padding: 14px 0;
+        }
+
+        .nav-actions,
+        .nav-link,
+        .ghost-btn,
+        .primary-btn {
+          width: 100%;
+        }
+
+        .register-layout {
+          grid-template-columns: 1fr;
+          padding: 48px 0;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .shell {
+          width: min(calc(100% - 24px), 1180px);
+        }
+
+        h1 {
+          font-size: 40px;
+          line-height: 1.08;
+        }
+
+        .status-strip {
+          grid-template-columns: 1fr;
+        }
+
+        .status-strip div {
+          border-right: 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .status-strip div:last-child {
+          border-bottom: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="nav">
+      <div class="shell nav-inner">
+        <a class="brand" href="/" aria-label="Axiora home">
+          <span class="logo" aria-hidden="true"></span>
+          <span>Axiora</span>
+        </a>
+        <div class="nav-actions">
+          <a class="nav-link" href="/" data-i18n="nav.home">Home</a>
+          <a class="ghost-btn" href="/" data-service-host="new-api" data-i18n="nav.signIn">Sign in</a>
+          <a class="primary-btn" href="/register/" data-i18n="nav.register">Register</a>
+          <div class="lang-switch" aria-label="Language switcher">
+            <button class="lang-btn" type="button" data-lang="en" aria-pressed="true">EN</button>
+            <button class="lang-btn" type="button" data-lang="zh" aria-pressed="false">ZH</button>
+            <button class="lang-btn" type="button" data-lang="ru" aria-pressed="false">RU</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="shell register-layout">
+      <section>
+        <div class="eyebrow">
+          <span class="pulse" aria-hidden="true"></span>
+          <span data-i18n="hero.eyebrow">Axiora Account preview</span>
+        </div>
+        <h1 data-i18n="hero.title">Create your unified AI access.</h1>
+        <p class="lead" data-i18n="hero.copy">This page prepares the public account entry. The secure account backend and SSO links will be connected in the next phase.</p>
+        <div class="status-strip" aria-label="Axiora account rollout">
+          <div>
+            <strong>01</strong>
+            <span data-i18n="steps.portal">Portal registration UI</span>
+          </div>
+          <div>
+            <strong>02</strong>
+            <span data-i18n="steps.idp">Identity provider</span>
+          </div>
+          <div>
+            <strong>03</strong>
+            <span data-i18n="steps.sso">Service SSO rollout</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="register-title">
+        <div class="card-top">
+          <span class="traffic red"></span>
+          <span class="traffic yellow"></span>
+          <span class="traffic green"></span>
+        </div>
+        <form id="register-form">
+          <div>
+            <h2 class="form-title" id="register-title" data-i18n="form.title">Register</h2>
+            <p class="form-copy" data-i18n="form.copy">Create an Axiora Account identity. Account persistence is intentionally not enabled yet.</p>
+          </div>
+          <label>
+            <span data-i18n="form.email">Email</span>
+            <input name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+          </label>
+          <label>
+            <span data-i18n="form.username">Username</span>
+            <input name="username" type="text" autocomplete="username" required placeholder="axiora-user">
+          </label>
+          <label>
+            <span data-i18n="form.password">Password</span>
+            <input name="password" type="password" autocomplete="new-password" required minlength="8">
+          </label>
+          <label>
+            <span data-i18n="form.confirm">Confirm password</span>
+            <input name="confirm" type="password" autocomplete="new-password" required minlength="8">
+          </label>
+          <button class="submit" type="submit" data-i18n="form.submit">Create account</button>
+          <p class="note" id="register-note" data-i18n="form.note">The visual registration page is ready. The secure account backend will be connected after we choose the unified identity provider.</p>
+        </form>
+      </section>
+    </main>
+
+    <script>
+      const translations = {
+        en: {
+          "nav.home": "Home",
+          "nav.signIn": "Sign in",
+          "nav.register": "Register",
+          "hero.eyebrow": "Axiora Account preview",
+          "hero.title": "Create your unified AI access.",
+          "hero.copy": "This page prepares the public account entry. The secure account backend and SSO links will be connected in the next phase.",
+          "steps.portal": "Portal registration UI",
+          "steps.idp": "Identity provider",
+          "steps.sso": "Service SSO rollout",
+          "form.title": "Register",
+          "form.copy": "Create an Axiora Account identity. Account persistence is intentionally not enabled yet.",
+          "form.email": "Email",
+          "form.username": "Username",
+          "form.password": "Password",
+          "form.confirm": "Confirm password",
+          "form.submit": "Create account",
+          "form.note": "The visual registration page is ready. The secure account backend will be connected after we choose the unified identity provider."
+        },
+        zh: {
+          "nav.home": "首页",
+          "nav.signIn": "登录",
+          "nav.register": "注册",
+          "hero.eyebrow": "Axiora Account 预览",
+          "hero.title": "创建 Axiora 账号。",
+          "hero.copy": "这个页面先准备官网账号入口。安全账号后端和四个服务的 SSO 会在下一阶段接入。",
+          "steps.portal": "官网注册界面",
+          "steps.idp": "统一身份服务",
+          "steps.sso": "服务 SSO 接入",
+          "form.title": "注册",
+          "form.copy": "创建 Axiora Account 身份。当前还没有启用真实账号保存。",
+          "form.email": "邮箱",
+          "form.username": "用户名",
+          "form.password": "密码",
+          "form.confirm": "确认密码",
+          "form.submit": "创建账号",
+          "form.note": "注册页面视觉入口已经准备好。选择统一身份方案后，再接入安全账号后端。"
+        },
+        ru: {
+          "nav.home": "Главная",
+          "nav.signIn": "Войти",
+          "nav.register": "Регистрация",
+          "hero.eyebrow": "Axiora Account preview",
+          "hero.title": "Единый доступ к AI-сервисам.",
+          "hero.copy": "Эта страница готовит публичную точку регистрации. Безопасный аккаунт-центр и SSO будут подключены на следующем этапе.",
+          "steps.portal": "Интерфейс регистрации",
+          "steps.idp": "Провайдер идентификации",
+          "steps.sso": "SSO для сервисов",
+          "form.title": "Регистрация",
+          "form.copy": "Создайте Axiora Account. Сохранение аккаунтов пока намеренно не включено.",
+          "form.email": "Email",
+          "form.username": "Имя пользователя",
+          "form.password": "Пароль",
+          "form.confirm": "Повторите пароль",
+          "form.submit": "Создать аккаунт",
+          "form.note": "Визуальная страница регистрации готова. Безопасный backend будет подключен после выбора единого провайдера идентификации."
+        }
+      };
+
+      function applyLanguage(lang) {
+        const safeLang = translations[lang] ? lang : "en";
+        document.documentElement.lang = safeLang === "zh" ? "zh-CN" : safeLang;
+        localStorage.setItem("axiora-lang", safeLang);
+
+        document.querySelectorAll("[data-i18n]").forEach((node) => {
+          const key = node.dataset.i18n;
+          node.textContent = translations[safeLang][key] || translations.en[key] || "";
+        });
+
+        document.querySelectorAll(".lang-btn").forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.lang === safeLang));
+        });
+      }
+
+      document.querySelectorAll(".lang-btn").forEach((button) => {
+        button.addEventListener("click", () => applyLanguage(button.dataset.lang));
+      });
+
+      document.getElementById("register-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        document.getElementById("register-note").classList.add("is-visible");
+      });
+
+      function resolveServiceLinks() {
+        const host = window.location.hostname;
+        const prefix = "portal.";
+        const hasPortalDomain = host.startsWith(prefix);
+        const baseDomain = hasPortalDomain ? host.slice(prefix.length) : "";
+
+        document.querySelectorAll("[data-service-host]").forEach((link) => {
+          const service = link.dataset.serviceHost;
+          if (hasPortalDomain) {
+            link.href = `https://${service}.${baseDomain}`;
+          }
+        });
+      }
+
+      resolveServiceLinks();
+      const requestedLang = new URLSearchParams(window.location.search).get("lang");
+      applyLanguage(requestedLang || localStorage.getItem("axiora-lang") || "en");
+    </script>
+  </body>
+</html>

@@ -188,6 +188,13 @@
         font-weight: 700;
       }
 
+      .register-btn {
+        border-color: rgba(255, 73, 63, 0.65);
+        background: linear-gradient(135deg, #f4f4ef, #ffd7d3);
+        color: #050506;
+        box-shadow: 0 14px 42px rgba(255, 73, 63, 0.14);
+      }
+
       .ghost-btn:hover,
       .primary-btn:hover,
       .lang-btn:hover {
@@ -673,20 +680,20 @@
           <span>Axiora</span>
         </a>
         <nav class="nav-links" aria-label="Primary navigation">
-          <a class="nav-link" href="#" data-service-host="sub2api" data-i18n="nav.lite">Axiora Lite</a>
-          <a class="nav-link" href="#" data-service-host="new-api" data-i18n="nav.axiora">Axiora</a>
-          <a class="nav-link" href="#" data-service-host="litellm" data-i18n="nav.smart">Axiora Smart</a>
-          <a class="nav-link" href="#" data-service-host="chat" data-i18n="nav.rita">Rita Chat</a>
+          <a class="nav-link" href="#products-title" data-i18n="nav.products">Products</a>
+          <a class="nav-link" href="#" data-service-host="new-api" data-i18n="nav.api">API</a>
+          <a class="nav-link" href="#" data-service-host="chat" data-i18n="nav.aiChat">AI Chat</a>
           <a class="nav-link" href="#pricing" data-i18n="nav.pricing">Pricing</a>
           <a class="nav-link" href="#docs" data-i18n="nav.docs">Docs</a>
         </nav>
         <div class="nav-actions">
+          <a class="ghost-btn" href="#" data-service-host="new-api" data-i18n="nav.signIn">Sign in</a>
+          <a class="primary-btn register-btn" href="/register/" data-i18n="nav.register">Register</a>
           <div class="lang-switch" aria-label="Language switcher">
             <button class="lang-btn" type="button" data-lang="en" aria-pressed="true">EN</button>
             <button class="lang-btn" type="button" data-lang="zh" aria-pressed="false">ZH</button>
             <button class="lang-btn" type="button" data-lang="ru" aria-pressed="false">RU</button>
           </div>
-          <a class="ghost-btn" href="#" data-service-host="new-api" data-i18n="nav.signIn">Sign in</a>
         </div>
       </div>
     </header>
@@ -913,6 +920,9 @@
     <script>
       const translations = {
         en: {
+          "nav.products": "Products",
+          "nav.api": "API",
+          "nav.aiChat": "AI Chat",
           "nav.lite": "Axiora Lite",
           "nav.axiora": "Axiora",
           "nav.smart": "Axiora Smart",
@@ -920,6 +930,7 @@
           "nav.pricing": "Pricing",
           "nav.docs": "Docs",
           "nav.signIn": "Sign in",
+          "nav.register": "Register",
           "hero.eyebrow": "AI API gateway for modern teams",
           "hero.title": "Unified AI API Infrastructure",
           "hero.subtitle": "Access OpenAI, Anthropic and next-generation AI models through one clean, reliable platform.",
@@ -992,6 +1003,9 @@
           "footer.privacy": "Privacy"
         },
         zh: {
+          "nav.products": "产品",
+          "nav.api": "API",
+          "nav.aiChat": "AI 聊天",
           "nav.lite": "Axiora Lite",
           "nav.axiora": "Axiora",
           "nav.smart": "Axiora Smart",
@@ -999,6 +1013,7 @@
           "nav.pricing": "价格",
           "nav.docs": "文档",
           "nav.signIn": "登录",
+          "nav.register": "注册",
           "hero.eyebrow": "面向现代团队的 AI API 网关",
           "hero.title": "统一的 AI API 基础设施",
           "hero.subtitle": "通过一个清爽、可靠的平台接入 OpenAI、Anthropic 以及下一代 AI 模型。",
@@ -1071,6 +1086,9 @@
           "footer.privacy": "隐私"
         },
         ru: {
+          "nav.products": "Продукты",
+          "nav.api": "API",
+          "nav.aiChat": "AI Chat",
           "nav.lite": "Axiora Lite",
           "nav.axiora": "Axiora",
           "nav.smart": "Axiora Smart",
@@ -1078,6 +1096,7 @@
           "nav.pricing": "Тарифы",
           "nav.docs": "Документы",
           "nav.signIn": "Войти",
+          "nav.register": "Регистрация",
           "hero.eyebrow": "AI API-шлюз для современных команд",
           "hero.title": "Единая AI API платформа",
           "hero.subtitle": "OpenAI, Anthropic и новые модели. Единая платформа.",
