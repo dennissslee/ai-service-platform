@@ -84,13 +84,14 @@ services:
       - "${SUB2API_PORT:-3001}:443"
     environment:
       TZ: ${TZ:-Asia/Shanghai}
+      DATA_DIR: /app/data
       PORT: "8080"
       GIN_MODE: ${SUB2API_GIN_MODE:-release}
       BASE_URL: ${SUB2API_BASE_URL}
       DATABASE_URL: ${SUB2API_DATABASE_URL}
       REDIS_URL: ${SUB2API_REDIS_URL}
     volumes:
-      - sub2api_data:/data
+      - sub2api_data:/app/data
     networks:
       - public
       - internal

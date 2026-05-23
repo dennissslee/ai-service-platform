@@ -7,4 +7,5 @@
 /services/dify/
 
 *.log
+*.pem
 .cache/
