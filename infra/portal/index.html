@@ -225,6 +225,14 @@
         font-size: clamp(44px, 7vw, 86px);
         line-height: 0.98;
         letter-spacing: 0;
+        overflow-wrap: normal;
+      }
+
+      html[lang="ru"] h1 {
+        max-width: 600px;
+        font-size: clamp(40px, 4.7vw, 64px);
+        line-height: 1.02;
+        overflow-wrap: anywhere;
       }
 
       .lead {
@@ -233,6 +241,7 @@
         color: #c5c5bd;
         font-size: clamp(17px, 2.3vw, 22px);
         line-height: 1.58;
+        overflow-wrap: break-word;
       }
 
       .hero-actions {
@@ -252,6 +261,7 @@
       .terminal {
         position: relative;
         overflow: hidden;
+        min-width: 0;
         border: 1px solid rgba(255, 255, 255, 0.16);
         border-radius: 12px;
         background:
@@ -293,6 +303,10 @@
         font-size: clamp(12px, 1.7vw, 14px);
         line-height: 1.9;
         color: #d7d7d1;
+      }
+
+      .terminal-body div {
+        overflow-wrap: anywhere;
       }
 
       .cmd {
@@ -586,7 +600,7 @@
 
       @media (max-width: 720px) {
         .shell {
-          width: min(100% - 24px, 1180px);
+          width: min(calc(100% - 24px), 1180px);
         }
 
         .nav-links {
@@ -602,6 +616,12 @@
 
         .hero {
           padding: 44px 0 42px;
+        }
+
+        .lead {
+          width: min(100%, calc(100vw - 24px));
+          max-width: calc(100vw - 24px);
+          font-size: 17px;
         }
 
         .hero-actions,
@@ -693,11 +713,11 @@
             <span class="traffic green"></span>
           </div>
           <div class="terminal-body">
-            <div><span class="cmd">$</span> axiora route --model gpt-4.1</div>
-            <div><span class="ok">200 OK</span> provider=openai latency=186ms</div>
-            <div><span class="cmd">$</span> axiora route --model claude-sonnet</div>
+            <div><span class="cmd">$</span> axiora route --model gpt-5.2</div>
+            <div><span class="ok">200 OK</span> provider=openai latency=142ms</div>
+            <div><span class="cmd">$</span> axiora route --model claude-opus-4-1-20250805</div>
             <div><span class="ok">200 OK</span> provider=anthropic fallback=ready</div>
-            <div><span class="accent">one key</span> /v1/chat/completions</div>
+            <div><span class="accent">frontier ready</span> /v1/chat/completions</div>
           </div>
           <div class="terminal-metrics">
             <div class="metric">
@@ -1059,8 +1079,8 @@
           "nav.docs": "Документы",
           "nav.signIn": "Войти",
           "hero.eyebrow": "AI API-шлюз для современных команд",
-          "hero.title": "Единая AI API инфраструктура",
-          "hero.subtitle": "Подключайте OpenAI, Anthropic и новые AI-модели через одну надежную и понятную платформу.",
+          "hero.title": "Единая AI API платформа",
+          "hero.subtitle": "OpenAI, Anthropic и новые модели. Единая платформа.",
           "hero.primary": "Начать",
           "hero.secondary": "Открыть Rita Chat",
           "metrics.uptime": "цель маршрутизации",
@@ -1180,7 +1200,8 @@
       });
 
       resolveServiceLinks();
-      applyLanguage(localStorage.getItem("axiora-lang") || "en");
+      const requestedLang = new URLSearchParams(window.location.search).get("lang");
+      applyLanguage(requestedLang || localStorage.getItem("axiora-lang") || "en");
     </script>
   </body>
 </html>
